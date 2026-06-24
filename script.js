@@ -173,16 +173,16 @@
     } finally {
       els.saveBtn.disabled = false;
       setTimeout(() => {
-        els.saveBtn.textContent = "Save Today's Entry";
+        els.saveBtn.textContent = 'Save Check-In';
         els.saveBtn.classList.remove('saved');
       }, 1800);
     }
   }
 
-  async function loadTodayIntoDashboard() {
+  async function loadLatestIntoDashboard() {
     let log = null;
     try {
-      log = await DB.getLogByDate(DB.todayStr());
+      log = await DB.getLatestLog();
     } catch (err) {
       console.error(err);
     }
@@ -201,9 +201,11 @@
   }
 
   // ── History ──
-  function formatDate(dateStr) {
-    const d = new Date(dateStr + 'T00:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
+  function formatTimestamp(isoStr) {
+    const d = new Date(isoStr);
+    const datePart = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
+    const timePart = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    return `${datePart} · ${timePart}`;
   }
 
   async function renderHistory() {
@@ -217,12 +219,12 @@
       return;
     }
     if (!logs.length) {
-      els.historyList.innerHTML = '<div class="history-empty">No entries yet — save your first day from the Dashboard.</div>';
+      els.historyList.innerHTML = '<div class="history-empty">No entries yet — save your first check-in from the Dashboard.</div>';
       return;
     }
     els.historyList.innerHTML = logs.map((log) => `
       <div class="history-card">
-        <div class="history-date">${formatDate(log.log_date)}</div>
+        <div class="history-date">${formatTimestamp(log.created_at)}</div>
         <div class="history-metrics">
           <span class="history-metric history-metric-energy">Energy ${log.energy_level}/10</span>
           <span class="history-metric history-metric-focus">Focus ${log.focus_state}/10</span>
@@ -367,7 +369,7 @@
       wireDashboard();
       state.dashboardMounted = true;
     }
-    await loadTodayIntoDashboard();
+    await loadLatestIntoDashboard();
   }
 
   DB.onAuthChange((session) => {

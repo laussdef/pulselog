@@ -34,11 +34,12 @@ import { createClient } from '@supabase/supabase-js';
     client.auth.onAuthStateChange((_event, session) => cb(session));
   }
 
-  async function getLogByDate(dateStr) {
+  async function getLatestLog() {
     const { data, error } = await client
       .from('logs')
       .select('*')
-      .eq('log_date', dateStr)
+      .order('created_at', { ascending: false })
+      .limit(1)
       .maybeSingle();
     if (error) throw error;
     return data;
@@ -48,7 +49,7 @@ import { createClient } from '@supabase/supabase-js';
     const session = await getSession();
     if (!session) throw new Error('Not authenticated');
     const row = { ...entry, user_id: session.user.id, log_date: entry.log_date || todayStr() };
-    const { error } = await client.from('logs').upsert(row, { onConflict: 'user_id,log_date' });
+    const { error } = await client.from('logs').insert(row);
     if (error) throw error;
   }
 
@@ -56,13 +57,13 @@ import { createClient } from '@supabase/supabase-js';
     const { data, error } = await client
       .from('logs')
       .select('*')
-      .order('log_date', { ascending: false });
+      .order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
   }
 
   window.PulseLogDB = {
     todayStr, signUp, signIn, signOut, getSession, onAuthChange,
-    getLogByDate, saveLog, listLogs,
+    getLatestLog, saveLog, listLogs,
   };
 })();
