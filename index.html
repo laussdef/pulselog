@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseLog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <div class="screen">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="date" id="date"></div>
+      <div class="wordmark-row">
+        <span class="wordmark">PulseLog</span>
+        <span class="pulse-dot">
+          <span class="pulse-ring"></span>
+          <span class="pulse-core"></span>
+        </span>
+      </div>
+    </header>
+
+    <!-- MINDSET & ENERGY -->
+    <div class="section-label">
+      <span class="dot dot-blue"></span>
+      <span>MINDSET &amp; ENERGY</span>
+    </div>
+    <div class="meters">
+      <div class="meter-card">
+        <div class="meter">
+          <svg width="144" height="144" viewBox="0 0 120 120">
+            <circle class="meter-track" cx="60" cy="60" r="52"></circle>
+            <circle class="meter-fill meter-fill-energy" id="energyArc" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="meter-readout">
+            <span class="meter-value" id="energyValue">7</span>
+            <span class="meter-unit">OUT OF 10</span>
+          </div>
+        </div>
+        <div class="meter-title">Energy Level</div>
+        <div class="meter-status meter-status-orange">Elevated</div>
+      </div>
+
+      <div class="meter-card">
+        <div class="meter">
+          <svg width="144" height="144" viewBox="0 0 120 120">
+            <circle class="meter-track" cx="60" cy="60" r="52"></circle>
+            <circle class="meter-fill meter-fill-focus" id="focusArc" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="meter-readout">
+            <span class="meter-value" id="focusValue">6</span>
+            <span class="meter-unit">OUT OF 10</span>
+          </div>
+        </div>
+        <div class="meter-title">Focus State</div>
+        <div class="meter-status meter-status-magenta">Steady</div>
+      </div>
+    </div>
+
+    <!-- FRICTION LOG -->
+    <div class="section-label">
+      <span class="dot dot-magenta"></span>
+      <span>FRICTION LOG</span>
+    </div>
+    <div class="section-heading">Identify Today's Friction</div>
+    <div class="friction-grid" id="frictionGrid">
+      <div class="friction-btn" data-friction="Perfectionism">Perfectionism</div>
+      <div class="friction-btn" data-friction="Burnout">Burnout</div>
+      <div class="friction-btn" data-friction="Creative Block">Creative Block</div>
+      <div class="friction-btn" data-friction="External Factor">External Factor</div>
+    </div>
+
+    <!-- ANCHORING WINS -->
+    <div class="section-label">
+      <span class="dot dot-orange"></span>
+      <span>ANCHORING WINS</span>
+    </div>
+    <div class="wins-card">
+      <div class="wins-title">Anchoring Wins</div>
+
+      <div class="field-label">THE UNSHAKABLE FACT</div>
+      <input type="text" id="anchorInput" class="anchor-input" placeholder="I delivered the Vyra proposal">
+
+      <div class="checklist" id="checklist">
+        <div class="check-row" data-check="hydration">
+          <div class="checkbox"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <span class="check-label">3L Hydration</span>
+        </div>
+        <div class="check-row" data-check="walk">
+          <div class="checkbox"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <span class="check-label">15min Walk</span>
+        </div>
+        <div class="check-row" data-check="play">
+          <div class="checkbox"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <span class="check-label">Creative Play</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GLASS NAV BAR -->
+  <nav class="navbar">
+    <div class="navbar-glass"></div>
+    <div class="navbar-items" id="navItems">
+      <div class="nav-item" data-nav="Dashboard">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.2-6 3.6 11 2.2-5h6.5"></path></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" data-nav="History">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 1.8"></path></svg>
+        <span>History</span>
+      </div>
+      <div class="nav-item" data-nav="Insights">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v-7"></path><path d="M12 20V5"></path><path d="M18 20v-4"></path></svg>
+        <span>Insights</span>
+      </div>
+      <div class="nav-item" data-nav="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"></path><circle cx="15" cy="8" r="2.4" fill="#000"></circle><path d="M4 16h16"></path><circle cx="9" cy="16" r="2.4" fill="#000"></circle></svg>
+        <span>Settings</span>
+      </div>
+    </div>
+  </nav>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
