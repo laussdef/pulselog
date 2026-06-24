@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  input::placeholder { color: rgba(245,245,247,0.3); }
+  input { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  @keyframes plsRing {
+    0%   { transform: scale(0.6); opacity: 0.65; }
+    100% { transform: scale(2.8); opacity: 0; }
+  }
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 26%, #16161c 0%, #060607 62%);padding:32px 20px;font-family:'Space Grotesk',system-ui,sans-serif">
+  <x-import component="IOSDevice" from="./ios-frame.jsx" dark="{{ true }}" hint-size="402px,874px">
+
+    <div style="height:100%;position:relative;background:#000000;color:#F5F5F7">
+
+      <div style="height:100%;overflow:auto;padding:56px 20px 122px">
+
+        <!-- ── HEADER ── -->
+        <div style="margin-bottom:30px">
+          <div style="font-size:10.5px;font-weight:500;letter-spacing:0.24em;color:rgba(245,245,247,0.42)">{{ date }}</div>
+          <div style="display:flex;align-items:baseline;gap:13px;margin-top:9px">
+            <span style="font-family:'Instrument Serif',serif;font-size:42px;line-height:0.9;letter-spacing:0.005em;color:#F7F7FA">PulseLog</span>
+            <span style="position:relative;width:11px;height:11px;display:inline-flex;align-items:center;justify-content:center;align-self:center;transform:translateY(-2px)">
+              <span style="position:absolute;width:11px;height:11px;border-radius:50%;background:rgba(47,128,255,0.55);animation:plsRing 2.2s ease-out infinite"></span>
+              <span style="position:relative;width:8px;height:8px;border-radius:50%;background:#2F80FF;box-shadow:0 0 11px 2px rgba(47,128,255,0.85)"></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ── MINDSET & ENERGY ── -->
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:15px">
+          <span style="width:5px;height:5px;border-radius:50%;background:#2F80FF;box-shadow:0 0 8px rgba(47,128,255,0.8)"></span>
+          <span style="font-size:10.5px;font-weight:500;letter-spacing:0.2em;color:rgba(245,245,247,0.5)">MINDSET &amp; ENERGY</span>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:34px">
+
+          <!-- Energy -->
+          <div style="flex:1;background:#131316;border:1px solid rgba(255,255,255,0.07);border-radius:22px;padding:18px 10px 16px;display:flex;flex-direction:column;align-items:center">
+            <div style="position:relative;width:144px;height:144px">
+              <svg width="144" height="144" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="9" stroke-linecap="round" stroke-dasharray="245.04 326.73" transform="rotate(135 60 60)"></circle>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#FF8A3D" stroke-width="9" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="{{ energyOffset }}" transform="rotate(135 60 60)" style="filter:drop-shadow(0 0 5px rgba(255,138,61,0.8));transition:stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1)"></circle>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:7px">
+                <span style="font-family:'Instrument Serif',serif;font-size:46px;line-height:0.85;color:#ffffff">{{ energy }}</span>
+                <span style="font-size:9.5px;font-weight:500;letter-spacing:0.18em;color:rgba(245,245,247,0.38);margin-top:4px">OUT OF 10</span>
+              </div>
+            </div>
+            <div style="margin-top:8px;font-size:13.5px;font-weight:500;color:#F5F5F7">Energy Level</div>
+            <div style="margin-top:3px;font-size:11px;letter-spacing:0.04em;color:rgba(255,138,61,0.85)">Elevated</div>
+          </div>
+
+          <!-- Focus -->
+          <div style="flex:1;background:#131316;border:1px solid rgba(255,255,255,0.07);border-radius:22px;padding:18px 10px 16px;display:flex;flex-direction:column;align-items:center">
+            <div style="position:relative;width:144px;height:144px">
+              <svg width="144" height="144" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="9" stroke-linecap="round" stroke-dasharray="245.04 326.73" transform="rotate(135 60 60)"></circle>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#FF2E9F" stroke-width="9" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="{{ focusOffset }}" transform="rotate(135 60 60)" style="filter:drop-shadow(0 0 5px rgba(255,46,159,0.8));transition:stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1)"></circle>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:7px">
+                <span style="font-family:'Instrument Serif',serif;font-size:46px;line-height:0.85;color:#ffffff">{{ focus }}</span>
+                <span style="font-size:9.5px;font-weight:500;letter-spacing:0.18em;color:rgba(245,245,247,0.38);margin-top:4px">OUT OF 10</span>
+              </div>
+            </div>
+            <div style="margin-top:8px;font-size:13.5px;font-weight:500;color:#F5F5F7">Focus State</div>
+            <div style="margin-top:3px;font-size:11px;letter-spacing:0.04em;color:rgba(255,46,159,0.85)">Steady</div>
+          </div>
+
+        </div>
+
+        <!-- ── FRICTION LOG ── -->
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:13px">
+          <span style="width:5px;height:5px;border-radius:50%;background:#FF2E9F;box-shadow:0 0 8px rgba(255,46,159,0.8)"></span>
+          <span style="font-size:10.5px;font-weight:500;letter-spacing:0.2em;color:rgba(245,245,247,0.5)">FRICTION LOG</span>
+        </div>
+        <div style="font-family:'Instrument Serif',serif;font-size:25px;line-height:1.1;color:#F2F2F5;margin-bottom:16px">Identify Today's Friction</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:34px">
+          <div onClick="{{ pickPerfectionism }}" style="{{ fStyle.perfectionism }}">Perfectionism</div>
+          <div onClick="{{ pickBurnout }}" style="{{ fStyle.burnout }}">Burnout</div>
+          <div onClick="{{ pickBlock }}" style="{{ fStyle.block }}">Creative Block</div>
+          <div onClick="{{ pickExternal }}" style="{{ fStyle.external }}">External Factor</div>
+        </div>
+
+        <!-- ── ANCHORING WINS ── -->
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:13px">
+          <span style="width:5px;height:5px;border-radius:50%;background:#FF8A3D;box-shadow:0 0 8px rgba(255,138,61,0.8)"></span>
+          <span style="font-size:10.5px;font-weight:500;letter-spacing:0.2em;color:rgba(245,245,247,0.5)">ANCHORING WINS</span>
+        </div>
+        <div style="background:#131316;border:1px solid rgba(255,255,255,0.07);border-radius:22px;padding:22px 20px 14px">
+          <div style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1;color:#F2F2F5">Anchoring Wins</div>
+
+          <div style="margin-top:20px;font-size:10px;font-weight:500;letter-spacing:0.2em;color:rgba(245,245,247,0.4)">THE UNSHAKABLE FACT</div>
+          <input type="text" value="{{ anchor }}" onChange="{{ onAnchor }}" placeholder="I delivered the Vyra proposal" style="width:100%;margin-top:10px;background:#0B0B0D;border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:14px 16px;color:#F5F5F7;font-size:15px;outline:none;transition:border-color 0.2s ease" style-focus="border-color:#2F80FF;box-shadow:0 0 0 3px rgba(47,128,255,0.12)" />
+
+          <div style="display:flex;flex-direction:column;margin-top:18px">
+            <div onClick="{{ toggleHydration }}" style="display:flex;align-items:center;gap:14px;padding:13px 2px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05)">
+              <div style="{{ checks.hydration.box }}">
+                <svg width="13" height="13" viewBox="0 0 14 14" style="opacity:{{ checks.hydration.tick }};transition:opacity 0.2s"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <span style="font-size:15px;font-weight:400;color:rgba(245,245,247,0.92)">3L Hydration</span>
+            </div>
+            <div onClick="{{ toggleWalk }}" style="display:flex;align-items:center;gap:14px;padding:13px 2px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05)">
+              <div style="{{ checks.walk.box }}">
+                <svg width="13" height="13" viewBox="0 0 14 14" style="opacity:{{ checks.walk.tick }};transition:opacity 0.2s"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <span style="font-size:15px;font-weight:400;color:rgba(245,245,247,0.92)">15min Walk</span>
+            </div>
+            <div onClick="{{ togglePlay }}" style="display:flex;align-items:center;gap:14px;padding:13px 2px;cursor:pointer">
+              <div style="{{ checks.play.box }}">
+                <svg width="13" height="13" viewBox="0 0 14 14" style="opacity:{{ checks.play.tick }};transition:opacity 0.2s"><path d="M2 7.5L5.5 11L12 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <span style="font-size:15px;font-weight:400;color:rgba(245,245,247,0.92)">Creative Play</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── GLASS NAV BAR ── -->
+      <div style="position:absolute;left:14px;right:14px;bottom:22px;height:66px;border-radius:26px;overflow:hidden">
+        <div style="position:absolute;inset:0;border-radius:26px;backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);background:rgba(20,20,24,0.62);border:1px solid rgba(255,255,255,0.09);box-shadow:inset 1px 1px 1px rgba(255,255,255,0.08), 0 8px 30px rgba(0,0,0,0.45)"></div>
+        <div style="position:relative;z-index:1;height:100%;display:flex;align-items:center;justify-content:space-around;padding:0 6px">
+          <div onClick="{{ goDashboard }}" style="{{ nav.dashboard }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.2-6 3.6 11 2.2-5h6.5"></path></svg>
+            <span style="font-size:9.5px;font-weight:500;letter-spacing:0.02em">Dashboard</span>
+          </div>
+          <div onClick="{{ goHistory }}" style="{{ nav.history }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 1.8"></path></svg>
+            <span style="font-size:9.5px;font-weight:500;letter-spacing:0.02em">History</span>
+          </div>
+          <div onClick="{{ goInsights }}" style="{{ nav.insights }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v-7"></path><path d="M12 20V5"></path><path d="M18 20v-4"></path></svg>
+            <span style="font-size:9.5px;font-weight:500;letter-spacing:0.02em">Insights</span>
+          </div>
+          <div onClick="{{ goSettings }}" style="{{ nav.settings }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"></path><circle cx="15" cy="8" r="2.4" fill="#000"></circle><path d="M4 16h16"></path><circle cx="9" cy="16" r="2.4" fill="#000"></circle></svg>
+            <span style="font-size:9.5px;font-weight:500;letter-spacing:0.02em">Settings</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;energyLevel&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 7, &quot;min&quot;: 0, &quot;max&quot;: 10, &quot;tsType&quot;: &quot;number&quot; },
+  &quot;focusLevel&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 6, &quot;min&quot;: 0, &quot;max&quot;: 10, &quot;tsType&quot;: &quot;number&quot; },
+  &quot;frictionFocus&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Creative Block&quot;, &quot;options&quot;: [&quot;Perfectionism&quot;, &quot;Burnout&quot;, &quot;Creative Block&quot;, &quot;External Factor&quot;], &quot;tsType&quot;: &quot;string&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    mounted: false,
+    selected: null,
+    checks: { hydration: true, walk: false, play: true },
+    anchor: '',
+    nav: 'Dashboard',
+  };
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ mounted: true }), 80);
+  }
+
+  renderVals() {
+    const C = 2 * Math.PI * 52;      // 326.726
+    const ARC = 0.75 * C;            // 245.044
+    const clamp = (n) => Math.max(0, Math.min(10, n));
+    const energy = clamp(this.props.energyLevel ?? 7);
+    const focus = clamp(this.props.focusLevel ?? 6);
+
+    const offset = (v) => (this.state.mounted ? C - (v / 10) * ARC : C);
+
+    const d = new Date();
+    const wd = d.toLocaleDateString('en-US', { weekday: 'long' });
+    const mo = d.toLocaleDateString('en-US', { month: 'long' });
+    const date = `${wd} · ${mo} ${d.getDate()}`.toUpperCase();
+
+    // ── Friction buttons ──
+    const selected = this.state.selected ?? (this.props.frictionFocus ?? 'Creative Block');
+    const baseBtn = {
+      display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+      height: '64px', borderRadius: '17px', fontSize: '15px', fontWeight: 500,
+      fontFamily: "'Space Grotesk', system-ui, sans-serif", cursor: 'pointer',
+      userSelect: 'none', transition: 'all 0.25s ease', WebkitTapHighlightColor: 'transparent',
+    };
+    const btnStyle = (active) => active
+      ? { ...baseBtn,
+          background: 'linear-gradient(#131316,#131316) padding-box, linear-gradient(135deg,#2F80FF,#FF2E9F) border-box',
+          border: '1.5px solid transparent',
+          boxShadow: '0 0 30px rgba(120,80,255,0.16)', color: '#ffffff' }
+      : { ...baseBtn,
+          background: '#131316', border: '1.5px solid rgba(255,255,255,0.07)',
+          color: 'rgba(245,245,247,0.82)' };
+
+    const fStyle = {
+      perfectionism: btnStyle(selected === 'Perfectionism'),
+      burnout: btnStyle(selected === 'Burnout'),
+      block: btnStyle(selected === 'Creative Block'),
+      external: btnStyle(selected === 'External Factor'),
+    };
+
+    // ── Checklist ──
+    const boxDone = {
+      width: '22px', height: '22px', flexShrink: 0, borderRadius: '7px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: '#2F80FF', border: '1.5px solid #2F80FF',
+      boxShadow: '0 0 13px rgba(47,128,255,0.5)', transition: 'all 0.2s ease',
+    };
+    const boxOff = {
+      width: '22px', height: '22px', flexShrink: 0, borderRadius: '7px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'transparent', border: '1.5px solid rgba(255,255,255,0.18)',
+      transition: 'all 0.2s ease',
+    };
+    const ck = this.state.checks;
+    const checks = {
+      hydration: { box: ck.hydration ? boxDone : boxOff, tick: ck.hydration ? 1 : 0 },
+      walk: { box: ck.walk ? boxDone : boxOff, tick: ck.walk ? 1 : 0 },
+      play: { box: ck.play ? boxDone : boxOff, tick: ck.play ? 1 : 0 },
+    };
+
+    // ── Nav ──
+    const navItem = (active) => ({
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px',
+      cursor: 'pointer', padding: '7px 13px', borderRadius: '15px',
+      transition: 'all 0.25s ease', WebkitTapHighlightColor: 'transparent',
+      color: active ? '#2F80FF' : 'rgba(245,245,247,0.5)',
+      background: active ? 'rgba(47,128,255,0.1)' : 'transparent',
+      filter: active ? 'drop-shadow(0 0 6px rgba(47,128,255,0.45))' : 'none',
+    });
+    const nv = this.state.nav;
+    const nav = {
+      dashboard: navItem(nv === 'Dashboard'),
+      history: navItem(nv === 'History'),
+      insights: navItem(nv === 'Insights'),
+      settings: navItem(nv === 'Settings'),
+    };
+
+    return {
+      date, energy, focus,
+      energyOffset: offset(energy),
+      focusOffset: offset(focus),
+      fStyle, checks, nav,
+      anchor: this.state.anchor,
+      onAnchor: (e) => this.setState({ anchor: e.target.value }),
+      pickPerfectionism: () => this.setState({ selected: 'Perfectionism' }),
+      pickBurnout: () => this.setState({ selected: 'Burnout' }),
+      pickBlock: () => this.setState({ selected: 'Creative Block' }),
+      pickExternal: () => this.setState({ selected: 'External Factor' }),
+      toggleHydration: () => this.setState((s) => ({ checks: { ...s.checks, hydration: !s.checks.hydration } })),
+      toggleWalk: () => this.setState((s) => ({ checks: { ...s.checks, walk: !s.checks.walk } })),
+      togglePlay: () => this.setState((s) => ({ checks: { ...s.checks, play: !s.checks.play } })),
+      goDashboard: () => this.setState({ nav: 'Dashboard' }),
+      goHistory: () => this.setState({ nav: 'History' }),
+      goInsights: () => this.setState({ nav: 'Insights' }),
+      goSettings: () => this.setState({ nav: 'Settings' }),
+    };
+  }
+}
+</script>
+</body>
+</html>
